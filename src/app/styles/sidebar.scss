@@ -1,4 +1,5 @@
-// Sidebar
+@media screen {
+    // Sidebar
 .sidebar {
     position: fixed;
     height: 100%;
@@ -7,6 +8,11 @@
 
 .mainContent {
     margin-left: 17%;
+}
+
+.btn {
+    width: 127px;
+    padding: 10px;
 }
 
 .navWrapper {
@@ -31,10 +37,6 @@
 
 .accordion-body {
     color: #a5b6c3;
-}
-
-.printButton {
-    padding: 10px;
 }
 
 .accordion-body {
@@ -78,4 +80,5 @@
     color: #a5b6c3;
     font-size: 20px;
     font-weight: 600;
+}
 }
