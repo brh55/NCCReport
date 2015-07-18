@@ -16,7 +16,8 @@
         chart: {
             data: {}
         },
-        tableTitle: []
+        tableTitle: [],
+        charts: []
     };
 
     vm.action = {
@@ -46,6 +47,21 @@
         updateData: function () {
             var length = vm.models.tables.table.data.length;
             console.log(length);
+        },
+        chartShow: function (type) {
+            if (checkState(vm.model.charts, type)) {
+                return false;
+            } else {
+                return true;
+            }
+        },
+        addState: function (type) {
+            if (checkState(vm.model.charts, type)) {
+                var indexToRemove = vm.model.charts.indexOf(type);
+                vm.model.charts.splice(indexToRemove, 1);
+            } else {
+                vm.model.charts.push(type);
+            }
         }
     };
 
@@ -57,21 +73,14 @@
 
     // Charts
     var data = {
-      labels : ["January","February","March","April","May","June","July"],
+      labels : ["Number Commenced","Number Terminated","Number Pending"],
       datasets : [
         {
           fillColor : "rgba(220,220,220,0.5)",
           strokeColor : "rgba(220,220,220,1)",
           pointColor : "rgba(220,220,220,1)",
           pointStrokeColor : "#fff",
-          data : [65,59,90,81,56,55,40]
-        },
-        {
-          fillColor : "rgba(151,187,205,0.5)",
-          strokeColor : "rgba(151,187,205,1)",
-          pointColor : "rgba(151,187,205,1)",
-          pointStrokeColor : "#fff",
-          data : [28,48,40,19,96,27,100]
+          data : [12061, 13868, 2904]
         }
       ]
     };

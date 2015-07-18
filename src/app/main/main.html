@@ -5,31 +5,31 @@
       <div class="col-sm-3 col-md-2 sidebar">
         <div class="navWrapper">
           <h1 class="logo">National Circuit Court Report Generator</h1>
-
+           <label> Report Title: 
+          <input type="text" name="input" ng-model="main.model.reportTitle" required ng-trim="false">
+          </label>
           <div class="printButton">
-            <button class="btn btn-info" ng-click="main.action.printFunction()"><i class="fa fa-print"></i> PRINT</button>
+            <button class="btn btn-info" ng-click="main.action.printFunction()"><i class="fa fa-print"></i> Print</button>
           </div>
 
-          <div class="update-wrapper">
-            <button ng-click"main.action.updateData()" class="btn btn-primary"><i class="fa fa-bolt"></i> Update Data</a>
-          </div>
+         
 
           <div class="filter-box">
+          <h5 class="filter-text">Filters</h5>
             <ul>
-              <li class="" ng-repeat="(key, value) in main.model.tables.table.data"><button class="btn btn-default" ng-click="main.action.updateState(key)"><i class="fa fa-plus"></i> {{key}}</button></li>
+              <li class="" ng-repeat="(key, value) in main.model.tables.table.data"><button class="btn btn-warning" ng-click="main.action.updateState(key)"><i class="fa fa-plus"></i> {{key}}</button></li>
 
             </ul>
           </div>
 
           <div class="chart-generator">
-            <ul>
-              <li>Box
-            </ul>
+              <h5 class="filter-text">Charts</h5>
+              <button ng-click="main.action.addState(pie)" class="btn btn-danger">Pie Chart</button>
+              <button ng-click="main.action.addState(bar)" class="btn btn-danger">Bar Chart</button>
           </div>
 
         </div>
       </div>
-
       <main class="mainContent col-md-9 col-sm-10">
         <h2 class="sub-header">{{main.model.reportTitle}}</h2>
 
@@ -58,10 +58,12 @@
 
         <!-- start of chart -->
         <h2 class="sub-header">Charts</h2>
+        <div ng-if="main.action.chartShow(pieChart)">
+          <h4> Total Numbers Chart </h4>
           <chart value="main.model.chart"></chart>
+        </div>
 
-        <canvas id="doughnut" class="chart chart-doughnut" data="main.model.pieData"
-  labels="main.model.pie.labels"></canvas>
+
 
 <!--
         <div class="table-responsive">
