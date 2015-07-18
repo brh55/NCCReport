@@ -6,34 +6,52 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($timeout, webDevTec, toastr) {
+  function MainController($timeout, $firebaseObject) {
     var vm = this;
 
-    vm.awesomeThings = [];
-    vm.classAnimation = '';
-    vm.creationDate = 1437224255686;
-    vm.showToastr = showToastr;
+    vm.model = {
+        reportTitle: 'Report 6',
+        tables: [],
+        states: []
+    };
 
-    activate();
+    vm.action = {
+        updateTitle: function (title) {
+            vm.model.reportTitle = title;
+        },
+        updateState: function (filter) {
+            if (checkState(vm.model.states, filter)) {
+                var indexToRemove = vm.model.states.indexOf(filter);
+                vm.model.states.splice(indexToRemove, 1);
+            } else {
+                vm.model.states.push(filter);
+            }
+        },
+        checkState: function (value) {
+            var check = vm.model.states.indexOf(value);
 
-    function activate() {
-      getWebDevTec();
-      $timeout(function() {
-        vm.classAnimation = 'rubberBand';
-      }, 4000);
-    }
+            if (checkState(vm.model.states, value)) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    };
 
-    function showToastr() {
-      toastr.info('Fork <a href="https://github.com/Swiip/generator-gulp-angular" target="_blank"><b>generator-gulp-angular</b></a>');
-      vm.classAnimation = '';
-    }
+    // Firebase Data Model
+    var ref = new Firebase("https://ncl-app.firebaseio.com");
 
-    function getWebDevTec() {
-      vm.awesomeThings = webDevTec.getTec();
+    // Set returned data to tables
+    vm.model.tables = $firebaseObject(ref);
 
-      angular.forEach(vm.awesomeThings, function(awesomeThing) {
-        awesomeThing.rank = Math.random();
-      });
+  }
+
+  function checkState (array, value) {
+    var check = array.indexOf(value)
+    if (check > -1) {
+        return true;
+    } else {
+        return false;
     }
   }
 })();

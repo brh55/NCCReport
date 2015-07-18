@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('nclreport', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'restangular', 'ngRoute']);
+    .module('nclreport', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'restangular', 'ngRoute', 'firebase']);
 
 })();
